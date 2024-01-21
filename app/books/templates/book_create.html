@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Form{% endblock %}
+
+{% block content %}
+  <h2>{% if book %}Update Book{% else %}Create New Book{% endif %}</h2>
+  <form method="post" class="form">
+    {% csrf_token %}
+    <label for="book_name">Book Name:</label>
+    <input type="text" id="book_name" name="book_name" class="form-control" value="{% if book %}{{ book.book_name }}{% endif %}" required>
+    
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" class="form-control" step="0.01" value="{% if book %}{{ book.price }}{% endif %}" required>
+
+    <label for="author">Author:</label>
+    <select id="author" name="author" class="form-select" required>
+      {% for author in authors %}
+        <option value="{{ author.id }}" {% if book and book.author.id == author.id %}selected{% endif %}>{{ author.author_name }}</option>
+      {% endfor %}
+    </select>
+    <br>
+    <button type="submit" class="btn btn-primary">{% if book %}Update{% else %}Create{% endif %} Book</button>
+  </form>
+{% endblock %}

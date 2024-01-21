@@ -1,3 +1,20 @@
 from django.db import models
 
-# Create your models here.
+
+class Author(models.Model):
+    """ 
+    Models for author 
+    """
+    author_name = models.CharField(max_length=255)
+
+
+class Books(models.Model):
+    """ 
+    Models for books 
+    """
+    book_name = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, default=None)
+
+
+
