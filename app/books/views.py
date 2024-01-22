@@ -32,7 +32,8 @@ class AuthorDetailsView(View):
     def get(self, request):
         author_id = request.GET.get('author_id')
         author = get_object_or_404(Author, pk=author_id)
-        books = Books.objects.filter(author=author)
+        # books = Books.objects.filter(author=author)
+        books = author.books_set.all()
         context = {'author':author,'books':books}
         return render(request, self.template_name, context)
 
