@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Author Detail{% endblock %}
+
+{% block content %}
+  <h2>Author Detail</h2>
+  <p><strong>Author Name:</strong> {{ author.author_name }}</p>
+  
+  <h3>Books by {{ author.author_name }}</h3>
+  {% if books %}
+    <ul>
+      {% for book in books %}
+        <li>{{ book.book_name }} (Price: {{ book.price }})</li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No books by this author.</p>
+  {% endif %}
+  
+  <a href="{% url 'books_list' %}" class="btn btn-primary">Back to Book List</a>
+{% endblock %}

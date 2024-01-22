@@ -20,7 +20,7 @@
           <tr>
             <td><a href="{% url 'book_detail' book.id %}">{{ book.book_name }}</a></td>
             <td>{{ book.price }}</td>
-            <td>{{ book.author.author_name }}</td>
+            <td><a href="{% url 'author_detail' %}?author_id={{ book.author.id }}">{{ book.author.author_name }}</a></td>
             <td>
               <a href="{% url 'update_book' book.id %}" class="btn btn-primary btn-sm">
                 <i class="fa fa-pencil"></i> Update

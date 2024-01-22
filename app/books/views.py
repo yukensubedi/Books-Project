@@ -22,6 +22,22 @@ class AuthorCreateView(View):
         )
         return HttpResponse('New Author created Successfully')
 
+class AuthorDetailsView(View):
+    """
+    Views to retrieve authors details  
+    """
+    
+    template_name = 'author_details.html'
+
+    def get(self, request):
+        author_id = request.GET.get('author_id')
+        author = get_object_or_404(Author, pk=author_id)
+        books = Books.objects.filter(author=author)
+        context = {'author':author,'books':books}
+        return render(request, self.template_name, context)
+
+
+
 class BooksCreateView(View):
     """
     Views to add books to database 
